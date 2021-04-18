@@ -3,7 +3,8 @@ pipeline {
     stages{
         stage('BuildTest'){
             steps{
-                sh '/usr/share/maven/bin/mvn clean package'
+                def mavenhome = tool name: 'localmaven', type: 'maven'
+                sh "${mavenhome}/bin/mvn clean package"
                 sh "docker build -t tomcatwebapp:${env.BUILD_ID} ."
             }
         }
