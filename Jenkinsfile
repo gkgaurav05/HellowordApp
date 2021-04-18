@@ -1,9 +1,9 @@
-def mavenhome = tool name: 'localmaven', type: 'maven'
 pipeline {
     agent any
     stages{
         stage('BuildTest'){
             steps{
+                def mavenhome = tool name: 'localmaven', type: 'maven'
                 sh "${mavenhome}/bin/mvn clean package"
                 sh "docker build -t tomcatwebapp:${env.BUILD_ID} ."
             }
